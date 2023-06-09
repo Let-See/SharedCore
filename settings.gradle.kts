@@ -1,3 +1,4 @@
+
 pluginManagement {
     repositories {
         google()
@@ -13,7 +14,8 @@ dependencyResolutionManagement {
     }
 }
 
+
+
+includeBuild("convention-plugins")
 rootProject.name = "LetSee"
 include(":LetSeeCore")
-includeBuild("convention-plugins")
-

@@ -1,3 +1,6 @@
+import gradle.kotlin.dsl.accessors._2502cef48cff830615fe1c6d6ab5e104.ext
+import gradle.kotlin.dsl.accessors._2502cef48cff830615fe1c6d6ab5e104.publishing
+import gradle.kotlin.dsl.accessors._2502cef48cff830615fe1c6d6ab5e104.signing
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.tasks.bundling.Jar
 import org.gradle.kotlin.dsl.`maven-publish`
@@ -8,13 +11,16 @@ plugins {
     `maven-publish`
     signing
 }
-
 // Stub secrets to let the project sync and build without the publication values set up
 ext["signing.keyId"] = null
 ext["signing.password"] = null
+ext["signing.secretKeyRingFile"] = null
 ext["signing.key"] = null
 ext["ossrhUsername"] = null
 ext["ossrhPassword"] = null
+
+val publishVersion: String by rootProject
+val publishGroupId: String by rootProject
 
 // Grabbing secrets from local.properties file or from environment variables, which could be used on CI
 val secretPropsFile = project.rootProject.file("local.properties")
@@ -33,10 +39,11 @@ if (secretPropsFile.exists()) {
     ext["ossrhUsername"] = System.getenv("OSSRH_USERNAME")
     ext["ossrhPassword"] = System.getenv("OSSRH_PASSWORD")
 }
-
-val javadocJar by tasks.registering(Jar::class) {
-    archiveClassifier.set("javadoc")
-}
+println("signing.keyId")
+println(project.name)
+//val javadocJar by tasks.registering(Jar::class) {
+//    archiveClassifier.set("javadoc")
+//}
 
 fun getExtraString(name: String) = ext[name]?.toString()
 
@@ -57,13 +64,15 @@ publishing {
     publications.withType<MavenPublication> {
 
         // Stub javadoc.jar artifact
-        artifact(javadocJar.get())
-
+        // artifact(javadocJar.get())
+        groupId = publishGroupId
+        version = publishVersion
+        artifactId = project.name
         // Provide artifacts information requited by Maven Central
         pom {
-            name.set("MPP Sample library")
-            description.set("Sample Kotlin Multiplatform library (jvm + ios + js) test")
-            url.set("https://github.com/KaterinaPetrova/mpp-sample-lib")
+            name.set(project.name)
+            description.set("LetSee provides an easy way to provide mock data to your iOS application. The main intention of having a library like this is to have a way to mock the response of requests on runtime in an easy way to be able to test all available scenarios without the need to rerun or change the code or put in the extra effort.")
+            url.set("https://github.com/let-see/SharedCore")
 
             licenses {
                 license {
@@ -73,13 +82,13 @@ publishing {
             }
             developers {
                 developer {
-                    id.set("KaterinaPetrova")
-                    name.set("Ekaterina Petrova")
-                    email.set("ekaterina.petrova@jetbrains.com")
+                    id.set("Jahanmanesh")
+                    name.set("Farshad Jahanmanesh")
+                    email.set("Farshad.Jahanmanesh@gmail.com")
                 }
             }
             scm {
-                url.set("https://github.com/KaterinaPetrova/mpp-sample-lib")
+                url.set("https://github.com/Let-See/SharedCore")
             }
 
         }
