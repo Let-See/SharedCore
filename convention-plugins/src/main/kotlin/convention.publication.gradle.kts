@@ -1,6 +1,6 @@
-import gradle.kotlin.dsl.accessors._2502cef48cff830615fe1c6d6ab5e104.ext
-import gradle.kotlin.dsl.accessors._2502cef48cff830615fe1c6d6ab5e104.publishing
-import gradle.kotlin.dsl.accessors._2502cef48cff830615fe1c6d6ab5e104.signing
+import gradle.kotlin.dsl.accessors._4ad077ad74816558e52d7069eb18a2f7.ext
+import gradle.kotlin.dsl.accessors._4ad077ad74816558e52d7069eb18a2f7.publishing
+import gradle.kotlin.dsl.accessors._4ad077ad74816558e52d7069eb18a2f7.signing
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.tasks.bundling.Jar
 import org.gradle.kotlin.dsl.`maven-publish`
@@ -62,7 +62,6 @@ publishing {
 
     // Configure all publications
     publications.withType<MavenPublication> {
-
         // Stub javadoc.jar artifact
         // artifact(javadocJar.get())
         groupId = publishGroupId

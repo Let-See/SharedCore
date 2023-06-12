@@ -1,10 +1,8 @@
 package io.github.letsee.implementations
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.AssetManager
 import io.github.letsee.interfaces.DirectoryFilesFetcher
-import java.io.File
 import java.io.IOException
 
 actual class DefaultDirectoryFilesFetcher: DirectoryFilesFetcher {
